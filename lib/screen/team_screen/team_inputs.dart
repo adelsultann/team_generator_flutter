@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:team_generator/providers/team_provider.dart';
-import 'package:team_generator/screen/resultTeam.dart';
+import 'package:team_generator/screen/team_screen/resultTeam.dart';
 
 class TeamInputsScreen extends ConsumerWidget {
-  const TeamInputsScreen({super.key});
+  const TeamInputsScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,34 +23,24 @@ class TeamInputsScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Generate teams
-          ref.read(teamProvider.notifier).generateTeams();
-// Access the updated state after generating teams
-          final updatedState = ref.read(teamProvider);
+          ref.watch(teamProvider).numberOfTeam;
+          ref.watch(teamProvider).numberOfPlayers;
+          ref.watch(teamProvider).playerPerTeam;
 
-          // Print generated teams
-          print('Generated Teams:');
-          for (int i = 0; i < updatedState.numberOfTeam; i++) {
-            print('Team ${i + 1}:');
-            final startIndex = i * updatedState.playerPerTeam;
-            final endIndex = (i + 1) * updatedState.playerPerTeam;
-            final teamPlayers = updatedState.players.sublist(
-              startIndex,
-              endIndex.clamp(0, updatedState.players.length),
+          final teamState = ref.read(teamProvider);
+          if (teamState.players.any((player) => player.name.isEmpty)) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                  content: Text('Please enter names for all players')),
             );
-            for (final player in teamPlayers) {
-              print('  Name: ${player.name}, Rating: ${player.rating}');
-            }
-          }
-          // Print players for debugging
-          print(teamState.players);
-
-          // Navigate to ResultTeamScreen
-          print(teamState.players);
-          Navigator.push(
+          } else {
+            // Generate teams and navigate
+            ref.read(teamProvider.notifier).generateTeams();
+            Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => const ResultTeamScreen()));
+              MaterialPageRoute(builder: (context) => const ResultTeamScreen()),
+            );
+          }
         },
         child: const Icon(Icons.check),
       ),
@@ -89,24 +81,30 @@ class _PlayerInputCardState extends ConsumerState<PlayerInputCard> {
     final isDifferentRating = teamState.isDifferentRating;
     print("isDifferentRating: $isDifferentRating");
 
-    // Safely access the player, or create a default one if it doesn't exist
+// Safely access the player, or create a default one if it doesn't exist
     final player = widget.playerIndex < teamState.players.length
-        //if true we will retained the existing player at that index
+//if true we will retained the existing player at that index
         ? teamState.players[widget.playerIndex]
-        // if false we will create new player objects
+// if false we will create new player objects
         : Player(name: '', rating: 'Fair');
 
-    // Update the controller text if it's different from the player's name
+// Update the controller text if it's different from the player's name
     if (_nameController.text != player.name) {
       _nameController.text = player.name;
     }
 
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
         child: Row(
           children: [
-            Text('${widget.playerIndex + 1}'),
+            SizedBox(
+              width: 20,
+              child: Text(
+                '${widget.playerIndex + 1}',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
             const SizedBox(width: 8),
             Expanded(
               child: TextField(
@@ -116,18 +114,23 @@ class _PlayerInputCardState extends ConsumerState<PlayerInputCard> {
                       .read(teamProvider.notifier)
                       .updatePlayerName(widget.playerIndex, value);
                 },
-                decoration: const InputDecoration(labelText: 'Player Name'),
+                decoration: const InputDecoration(
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(vertical: 8),
+                  border: InputBorder.none,
+                  hintText: 'Player Name',
+                ),
               ),
             ),
-            // if the rating is set to different we will render this
             if (isDifferentRating) ...[
               const SizedBox(width: 8),
               DropdownButton<String>(
                 value: player.rating,
+                isDense: true,
                 items: ['Excellent', 'Good', 'Fair'].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value),
+                    child: Text(value), // Use only the first letter
                   );
                 }).toList(),
                 onChanged: (String? newValue) {

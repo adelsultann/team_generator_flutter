@@ -75,7 +75,7 @@ class TeamNotifier extends StateNotifier<TeamState> {
   void setNumberOfPlayers(int count) {
     state = state.copyWith(
       numberOfPlayers: count,
-      numberOfTeam: (count / state.playerPerTeam).ceil(),
+
       //List.generate is built in function on dart
       players: List.generate(
         count,
@@ -123,77 +123,58 @@ class TeamNotifier extends StateNotifier<TeamState> {
   }
 
   void generateTeams() {
-    List<Player> excellentPlayers = [];
-    List<Player> goodPlayers = [];
-    List<Player> fairPlayers = [];
+    List<Player> allPlayers = List.from(state.players);
+    allPlayers.shuffle(); // Shuffle all players for randomness
 
-    // Sort players into skill levels
-    for (var player in state.players) {
-      switch (player.rating) {
-        case 'Excellent':
-          excellentPlayers.add(player);
-          break;
-        case 'Good':
-          goodPlayers.add(player);
-          break;
-        case 'Fair':
-          fairPlayers.add(player);
-          break;
-      }
-    }
+    int totalPlayers = allPlayers.length;
+    int numberOfTeams = state.numberOfTeam;
+    int minPlayersPerTeam = (totalPlayers / numberOfTeams).floor();
+    int extraPlayers = totalPlayers % numberOfTeams;
 
-    //this will create an empty list that will hold lists of players each inner list
-    //repesent team
+    List<List<Player>> teams = List.generate(numberOfTeams, (_) => []);
 
-    List<List<Player>> teams = [];
-
-    // Check for the specific case: 4 players, 2 good, 1 fair, 1 excellent
-    if (state.players.length == 4 &&
-        excellentPlayers.length == 1 &&
-        goodPlayers.length == 2 &&
-        fairPlayers.length == 1) {
-      // Create two teams
-      teams = [
-        [excellentPlayers[0], fairPlayers[0]], // Team 1: Excellent + Fair
-        [goodPlayers[0], goodPlayers[1]] // Team 2: Good + Good
-      ];
-    } else {
-      // For all other cases, use the original distribution logic
-      teams = List.generate(state.numberOfTeam, (_) => []);
-      List<List<Player>> skillLevels = [
-        excellentPlayers,
-        goodPlayers,
-        fairPlayers
-      ];
-
-      for (var skillLevel in skillLevels) {
-        skillLevel.shuffle(); // Shuffle players within each skill level
-        int teamIndex = 0;
-
-        for (var player in skillLevel) {
-          teams[teamIndex].add(player);
-          //modulo operation. It gives us the remainder when dividing by the number of teams.
-          teamIndex = (teamIndex + 1) % state.numberOfTeam;
+    // Distribute players evenly
+    for (int i = 0; i < totalPlayers; i++) {
+      int teamIndex = i % numberOfTeams;
+      if (teams[teamIndex].length < minPlayersPerTeam ||
+          (extraPlayers > 0 && teams[teamIndex].length == minPlayersPerTeam)) {
+        teams[teamIndex].add(allPlayers[i]);
+        if (teams[teamIndex].length > minPlayersPerTeam) {
+          extraPlayers--;
         }
       }
     }
 
-// explain the flattening
-//    [
-//   [Player1, Player2],
-//   [Player3, Player4],
-//   [Player5, Player6]
-// ]
-//becone [Player1, Player2, Player3, Player4, Player5, Player6]
+    // Remove any empty teams
+    teams.removeWhere((team) => team.isEmpty);
 
-// we did this because at the end state expect single list
+    // Sort players within each team by skill level
+    for (var team in teams) {
+      team.sort((a, b) =>
+          _getSkillValue(b.rating).compareTo(_getSkillValue(a.rating)));
+    }
+
     List<Player> distributedPlayers = teams.expand((team) => team).toList();
 
-    // Update the state with the new player order and number of teams
+    // Update the state
     state = state.copyWith(
-        players: distributedPlayers,
-        numberOfTeam: teams.length,
-        playerPerTeam: teams.isNotEmpty ? teams[0].length : 0);
+      players: distributedPlayers,
+      numberOfTeam: teams.length,
+      playerPerTeam: teams.isNotEmpty ? teams[0].length : 0,
+    );
+  }
+
+  int _getSkillValue(String rating) {
+    switch (rating) {
+      case 'Excellent':
+        return 3;
+      case 'Good':
+        return 2;
+      case 'Fair':
+        return 1;
+      default:
+        return 0;
+    }
   }
 }
 

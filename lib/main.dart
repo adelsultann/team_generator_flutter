@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:team_generator/providers/theme_providers.dart';
-import 'package:team_generator/screen/team.dart';
+import 'package:team_generator/screen/numbers_screen/numbers.dart';
+import 'package:team_generator/screen/password_screen/password_input_screen.dart';
+import 'package:team_generator/screen/roulette_Screen/roulette_input_screen.dart';
+import 'package:team_generator/screen/team_screen/team.dart';
 import 'package:team_generator/widgets/mainItem.dart';
 
+final darkTheme = ThemeData.dark().copyWith(
+  primaryColor: Colors.blueGrey[900],
+  scaffoldBackgroundColor: Colors.grey[900],
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.blueGrey[900],
+    elevation: 0,
+  ),
+  colorScheme: ColorScheme.dark(
+    primary: Colors.blue,
+    secondary: Colors.blueAccent,
+    surface: Colors.blueGrey[800]!,
+    background: Colors.grey[900]!,
+    onPrimary: Colors.white,
+    onSecondary: Colors.white,
+    onSurface: Colors.white,
+    onBackground: Colors.white,
+  ),
+);
 void main() {
   runApp(
     ProviderScope(
@@ -67,7 +88,7 @@ class HomeScreen extends ConsumerWidget {
             height: 15,
           ),
           MainItem(
-            text: "random Number",
+            text: "Numbers",
             imagePath: 'assets/images/team.png',
             gradient: const LinearGradient(
               colors: [Colors.purple, Colors.blue],
@@ -77,7 +98,45 @@ class HomeScreen extends ConsumerWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const TeamScreen()),
+                MaterialPageRoute(builder: (context) => const NumbersScreen()),
+              );
+            },
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          MainItem(
+            text: "Roulette Wheel",
+            imagePath: 'assets/images/team.png',
+            gradient: const LinearGradient(
+              colors: [Colors.purple, Colors.blue],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const RouletteInputScreen()),
+              );
+            },
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          MainItem(
+            text: "Generate Password",
+            imagePath: 'assets/images/team.png',
+            gradient: const LinearGradient(
+              colors: [Colors.purple, Colors.blue],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const PasswordInputScreen()),
               );
             },
           ),

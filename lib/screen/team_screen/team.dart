@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:team_generator/screen/team_inputs.dart';
+import 'package:team_generator/providers/team_provider.dart';
+import 'package:team_generator/screen/team_screen/team_inputs.dart';
 
 import 'package:team_generator/widgets/TeamWidgets/NumberOfTeam.dart';
 import 'package:team_generator/widgets/TeamWidgets/PlayerCountSelector.dart';
@@ -29,6 +30,7 @@ class TeamScreen extends ConsumerWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
+                  ref.read(teamProvider.notifier);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => TeamInputsScreen()),
