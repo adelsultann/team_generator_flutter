@@ -124,36 +124,22 @@ class TeamNotifier extends StateNotifier<TeamState> {
 
   void generateTeams() {
     List<Player> allPlayers = List.from(state.players);
-    allPlayers.shuffle(); // Shuffle all players for randomness
-
-    int totalPlayers = allPlayers.length;
     int numberOfTeams = state.numberOfTeam;
-    int minPlayersPerTeam = (totalPlayers / numberOfTeams).floor();
-    int extraPlayers = totalPlayers % numberOfTeams;
 
+    // Sort players by skill level in ascending order
+    allPlayers.sort(
+        (a, b) => _getSkillValue(a.rating).compareTo(_getSkillValue(b.rating)));
+
+    // Create an array of teams, each team initially empty
     List<List<Player>> teams = List.generate(numberOfTeams, (_) => []);
 
-    // Distribute players evenly
-    for (int i = 0; i < totalPlayers; i++) {
+    // Distribute players among teams
+    for (int i = 0; i < allPlayers.length; i++) {
       int teamIndex = i % numberOfTeams;
-      if (teams[teamIndex].length < minPlayersPerTeam ||
-          (extraPlayers > 0 && teams[teamIndex].length == minPlayersPerTeam)) {
-        teams[teamIndex].add(allPlayers[i]);
-        if (teams[teamIndex].length > minPlayersPerTeam) {
-          extraPlayers--;
-        }
-      }
+      teams[teamIndex].add(allPlayers[i]);
     }
 
-    // Remove any empty teams
-    teams.removeWhere((team) => team.isEmpty);
-
-    // Sort players within each team by skill level
-    for (var team in teams) {
-      team.sort((a, b) =>
-          _getSkillValue(b.rating).compareTo(_getSkillValue(a.rating)));
-    }
-
+    // Flatten the teams list
     List<Player> distributedPlayers = teams.expand((team) => team).toList();
 
     // Update the state
@@ -162,6 +148,17 @@ class TeamNotifier extends StateNotifier<TeamState> {
       numberOfTeam: teams.length,
       playerPerTeam: teams.isNotEmpty ? teams[0].length : 0,
     );
+
+    // Print teams for debugging
+    for (int i = 0; i < teams.length; i++) {
+      print('Team ${i + 1}:');
+      for (var player in teams[i]) {
+        print(
+            '  ${player.name} - ${player.rating} (${_getSkillValue(player.rating)})');
+      }
+      print(
+          '  Total Skill: ${teams[i].map((p) => _getSkillValue(p.rating)).reduce((a, b) => a + b)}');
+    }
   }
 
   int _getSkillValue(String rating) {

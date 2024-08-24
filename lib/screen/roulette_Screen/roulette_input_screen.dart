@@ -48,8 +48,9 @@ class _RouletteInputScreenState extends ConsumerState<RouletteInputScreen> {
                     return ListTile(
                       leading: Text(
                         '${index + 1}',
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 15),
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 254, 251, 251),
+                            fontSize: 15),
                       ),
                       title: TextField(
                         controller: _controllers[index],

@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:team_generator/screen/password_screen/password_result_screen.dart';
 
 class PasswordInputScreen extends ConsumerStatefulWidget {
-  const PasswordInputScreen({super.key});
+  const PasswordInputScreen({
+    super.key,
+  });
 
   @override
   _PasswordInputScreenState createState() => _PasswordInputScreenState();
@@ -64,7 +66,9 @@ class _PasswordInputScreenState extends ConsumerState<PasswordInputScreen> {
                           IconButton(
                             icon: const Icon(Icons.add, color: Colors.white),
                             onPressed: () {
-                              setState(() => passwordLength++);
+                              if (passwordLength < 30) {
+                                setState(() => passwordLength++);
+                              }
                             },
                           ),
                         ],

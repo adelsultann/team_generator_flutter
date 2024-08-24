@@ -89,7 +89,7 @@ class HomeScreen extends ConsumerWidget {
           ),
           MainItem(
             text: "Numbers",
-            imagePath: 'assets/images/team.png',
+            imagePath: 'assets/images/numbers-ing.png',
             gradient: const LinearGradient(
               colors: [Colors.purple, Colors.blue],
               begin: Alignment.topLeft,
@@ -107,7 +107,7 @@ class HomeScreen extends ConsumerWidget {
           ),
           MainItem(
             text: "Roulette Wheel",
-            imagePath: 'assets/images/team.png',
+            imagePath: 'assets/images/roulette-wheel.png',
             gradient: const LinearGradient(
               colors: [Colors.purple, Colors.blue],
               begin: Alignment.topLeft,
@@ -126,7 +126,7 @@ class HomeScreen extends ConsumerWidget {
           ),
           MainItem(
             text: "Generate Password",
-            imagePath: 'assets/images/team.png',
+            imagePath: 'assets/images/lock.png',
             gradient: const LinearGradient(
               colors: [Colors.purple, Colors.blue],
               begin: Alignment.topLeft,

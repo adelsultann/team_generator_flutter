@@ -8,7 +8,8 @@ class PasswordResultScreen extends StatelessWidget {
   final bool useNumbers;
   final bool useSpecialChars;
 
-  PasswordResultScreen({
+  const PasswordResultScreen({
+    super.key,
     required this.length,
     required this.useCapitalLetters,
     required this.useSmallLetters,
@@ -42,16 +43,16 @@ class PasswordResultScreen extends StatelessWidget {
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.orange,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(Icons.arrow_back, color: Colors.white),
+                  child: const Icon(Icons.arrow_back, color: Colors.white),
                 ),
               ),
-              SizedBox(height: 40),
-              Center(
+              const SizedBox(height: 40),
+              const Center(
                 child: Text(
                   'Generated Password',
                   style: TextStyle(
@@ -60,34 +61,35 @@ class PasswordResultScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Center(
                 child: Container(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.grey[900],
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: SelectableText(
                     password,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
                     // Implement copy to clipboard functionality
                   },
-                  child:
-                      Text('Copy to Clipboard', style: TextStyle(fontSize: 18)),
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 15),
                   ),
+                  child: const Text('Copy to Clipboard',
+                      style: TextStyle(fontSize: 18)),
                 ),
               ),
             ],
