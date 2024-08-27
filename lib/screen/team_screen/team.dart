@@ -7,6 +7,7 @@ import 'package:team_generator/widgets/TeamWidgets/NumberOfTeam.dart';
 import 'package:team_generator/widgets/TeamWidgets/PlayerCountSelector.dart';
 import 'package:team_generator/widgets/TeamWidgets/PlayerPerTeam.dart';
 import 'package:team_generator/widgets/TeamWidgets/playerrating.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TeamScreen extends ConsumerWidget {
   const TeamScreen({super.key});
@@ -39,9 +40,9 @@ class TeamScreen extends ConsumerWidget {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                 ),
-                child: const Text(
-                  'Create',
-                  style: TextStyle(fontSize: 18.0),
+                child: Text(
+                  AppLocalizations.of(context)!.create,
+                  style: const TextStyle(fontSize: 18.0),
                 ),
               ),
             ),

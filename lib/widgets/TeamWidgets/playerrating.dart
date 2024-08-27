@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:team_generator/providers/team_provider.dart';
-
-const List<Widget> _toggleButtonsSelection = <Widget>[
-  Text('Different'),
-  Text('Same'),
-];
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlayerRating extends ConsumerWidget {
   const PlayerRating({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    List<Widget> toggleButtonsSelection = <Widget>[
+      Text(AppLocalizations.of(context)!.different),
+      Text(AppLocalizations.of(context)!.same),
+    ];
+
     final teamState = ref.watch(teamProvider);
     final isDifferentRating = teamState.isDifferentRating;
 
@@ -20,9 +22,9 @@ class PlayerRating extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            "Player Rating",
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.playerRating,
+            style: const TextStyle(
               fontSize: 20,
             ),
           ),
@@ -42,7 +44,7 @@ class PlayerRating extends ConsumerWidget {
               minWidth: 80.0,
             ),
             isSelected: [isDifferentRating, !isDifferentRating],
-            children: _toggleButtonsSelection,
+            children: toggleButtonsSelection,
           ),
         ],
       ),

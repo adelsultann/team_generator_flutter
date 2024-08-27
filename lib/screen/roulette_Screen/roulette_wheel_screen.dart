@@ -6,6 +6,8 @@ import 'package:roulette/roulette.dart';
 import 'package:team_generator/providers/roulette_provider.dart';
 import 'package:team_generator/utils/randomcolorsRoulette.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class RouletteWheelScreen extends ConsumerStatefulWidget {
   const RouletteWheelScreen({super.key});
   @override
@@ -107,7 +109,7 @@ class _RouletteWheelScreenState extends ConsumerState<RouletteWheelScreen>
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _spinWheel,
-                  child: const Text('Spin'),
+                  child: Text(AppLocalizations.of(context)!.spin),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:team_generator/providers/team_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlayerCountSelector extends ConsumerWidget {
   @override
@@ -12,7 +13,8 @@ class PlayerCountSelector extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text("Number of Players", style: TextStyle(fontSize: 16)),
+          Text(AppLocalizations.of(context)!.numberOfPlaytters,
+              style: const TextStyle(fontSize: 16)),
           Row(
             children: [
               IconButton(

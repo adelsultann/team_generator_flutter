@@ -1,0 +1,11 @@
+{
+  "appTitle": "Team Generator",
+  "playerInputs": "Player Inputs",
+  "generateTeams": "Generate Teams",
+  "playerName": "Player Name",
+  "playerRating": "Player Rating",
+  "excellent": "Excellent",
+  "good": "Good",
+  "fair": "Fair",
+  "teamResults": "Team Results"
+}

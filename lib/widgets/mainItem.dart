@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:lazy_image/lazy_image.dart';
 
 class MainItem extends StatelessWidget {
-  final String text;
+  final String Function(BuildContext) textBuilder;
+  // final String text;
   final String imagePath;
   final Gradient gradient;
   final VoidCallback onTap;
 
   const MainItem({
     super.key,
-    required this.text,
+    //for languages
+    required this.textBuilder,
+    // required this.text,
     required this.imagePath,
     required this.gradient,
     required this.onTap,
@@ -27,12 +31,12 @@ class MainItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 1, 1, 0),
+          padding: const EdgeInsets.fromLTRB(5, 1, 6, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                text,
+                textBuilder(context),
                 style: const TextStyle(color: Colors.white, fontSize: 30),
               ),
               Image.asset(

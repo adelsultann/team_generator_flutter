@@ -1,0 +1,45 @@
+{
+  "appTitle": "Team Generatorr",
+  "playerInputs": "Player Inputs",
+  "generateTeams": "Generate Teams",
+  "playerName": "Player Name",
+  "numberOfTeam":"number of Team",
+  "playerRating": "Player Rating",
+  "excellent": "Excellent",
+  "good": "Good",
+  "fair": "Fair",
+  "seamResults": "Team Results",
+  "playerPerTeam": "Players Per Team",
+  "numberOfPlaytters": "Number of Players",
+  "different": "Different",
+  "same": "Same",
+  "create": "Create",
+  "settings": "Settings",
+  "darkMode": "Dark Mode",
+  "language": "Language",
+    "team": "Team",
+  "numbers": "Numbers",
+  "rouletteWheel": "Roulette Wheel",
+  "generatePassword": "Generate Password",
+  "randomNumbersTitle": "Random Numbers",
+  "minumiumNumbers": "Minumium Number",
+  "maxumiumNumbers": "Maximum Number",
+  "numberOfResult": "Number Of Result",
+  "enterName": "Enter name",
+  "addName": "Add Name",
+  "spin": "Spin",
+  "capitalLetters": "Capital Letters",
+  "smallLetters": "Small Letters",
+  "numbers": "Numbers",
+  "specialChars": "Special Chars",
+  "passwordLength": "Password Length",
+  "generate": "Generate",
+  "playersinputs":"Player Inputs",
+  "wearningMessage": "Please enter names for all players",
+  "passwordLength": "Password Length"
+
+
+  
+
+
+}

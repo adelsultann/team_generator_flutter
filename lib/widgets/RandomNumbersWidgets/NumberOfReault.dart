@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:team_generator/providers/randomNumbers_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NumberOfReault extends ConsumerWidget {
   const NumberOfReault({super.key});
@@ -13,8 +14,8 @@ class NumberOfReault extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            "Number Of Reault",
+          Text(
+            AppLocalizations.of(context)!.numberOfResult,
             style: TextStyle(fontSize: 16),
           ),
           Row(

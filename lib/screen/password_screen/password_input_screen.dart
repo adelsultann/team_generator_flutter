@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:team_generator/screen/password_screen/password_result_screen.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class PasswordInputScreen extends ConsumerStatefulWidget {
   const PasswordInputScreen({
     super.key,
@@ -47,7 +49,7 @@ class _PasswordInputScreenState extends ConsumerState<PasswordInputScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Password Length',
+                      Text(AppLocalizations.of(context)!.passwordLength,
                           style: TextStyle(color: Colors.white, fontSize: 18)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -84,13 +86,28 @@ class _PasswordInputScreenState extends ConsumerState<PasswordInputScreen> {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      _buildSwitch('Capital Letters', useCapitalLetters,
+                      _buildSwitch(
+                          context,
+                          (context) =>
+                              AppLocalizations.of(context)!.capitalLetters,
+                          useCapitalLetters,
                           (value) => setState(() => useCapitalLetters = value)),
-                      _buildSwitch('Small Letters', useSmallLetters,
+                      _buildSwitch(
+                          context,
+                          (context) =>
+                              AppLocalizations.of(context)!.smallLetters,
+                          useSmallLetters,
                           (value) => setState(() => useSmallLetters = value)),
-                      _buildSwitch('Numbers', useNumbers,
+                      _buildSwitch(
+                          context,
+                          (context) => AppLocalizations.of(context)!.numbers,
+                          useNumbers,
                           (value) => setState(() => useNumbers = value)),
-                      _buildSwitch('Special Chars', useSpecialChars,
+                      _buildSwitch(
+                          context,
+                          (context) =>
+                              AppLocalizations.of(context)!.specialChars,
+                          useSpecialChars,
                           (value) => setState(() => useSpecialChars = value)),
                     ],
                   ),
@@ -114,11 +131,12 @@ class _PasswordInputScreenState extends ConsumerState<PasswordInputScreen> {
                       ),
                     );
                   },
-                  child: const Text('Generate', style: TextStyle(fontSize: 18)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 50, vertical: 15),
                   ),
+                  child: Text(AppLocalizations.of(context)!.create,
+                      style: const TextStyle(fontSize: 18)),
                 ),
               ),
             ],
@@ -128,11 +146,16 @@ class _PasswordInputScreenState extends ConsumerState<PasswordInputScreen> {
     );
   }
 
-  Widget _buildSwitch(String title, bool value, Function(bool) onChanged) {
+  Widget _buildSwitch(
+      BuildContext context,
+      String Function(BuildContext) textBuilder,
+      bool value,
+      Function(bool) onChanged) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: const TextStyle(color: Colors.white, fontSize: 18)),
+        Text(textBuilder(context),
+            style: const TextStyle(color: Colors.white, fontSize: 18)),
         Switch(
           value: value,
           onChanged: onChanged,
@@ -142,3 +165,18 @@ class _PasswordInputScreenState extends ConsumerState<PasswordInputScreen> {
     );
   }
 }
+
+//   Widget _buildSwitch(String title, bool value, Function(bool) onChanged) {
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//       children: [
+//         Text(title, style: const TextStyle(color: Colors.white, fontSize: 18)),
+//         Switch(
+//           value: value,
+//           onChanged: onChanged,
+//           activeColor: Colors.orange,
+//         ),
+//       ],
+//     );
+//   }
+// }

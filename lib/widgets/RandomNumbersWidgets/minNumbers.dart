@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:team_generator/providers/randomNumbers_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MinNumber extends ConsumerWidget {
   const MinNumber({super.key});
@@ -13,9 +14,9 @@ class MinNumber extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            "Minumium Number",
-            style: TextStyle(fontSize: 16),
+          Text(
+            AppLocalizations.of(context)!.minumiumNumbers,
+            style: const TextStyle(fontSize: 16),
           ),
           Row(
             children: [

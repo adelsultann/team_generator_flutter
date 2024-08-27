@@ -147,6 +147,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_riverpod:
     dependency: "direct main"
     description:
@@ -208,6 +213,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.19.0"
   io:
     dependency: transitive
     description:
@@ -224,6 +237,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.1"
+  lazy_image:
+    dependency: "direct main"
+    description:
+      name: lazy_image
+      sha256: "6396475fbe41995769613b41cf6a9464bdbf3fd6fbc90a563a5ea453664c4ba2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   leak_tracker:
     dependency: transitive
     description:
@@ -509,6 +530,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  visibility_detector:
+    dependency: transitive
+    description:
+      name: visibility_detector
+      sha256: ec932527913f32f65aa01d3a393504240b9e9021ecc77123f017755605e48832
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.2"
   vm_service:
     dependency: transitive
     description:

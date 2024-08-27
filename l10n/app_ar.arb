@@ -1,0 +1,11 @@
+{
+  "appTitle": "مولد الفريق",
+  "playerInputs": "إدخالات اللاعبين",
+  "generateTeams": "إنشاء الفرق",
+  "playerName": "اسم اللاعب",
+  "playerRating": "تقييم اللاعب",
+  "excellent": "ممتاز",
+  "good": "جيد",
+  "fair": "مقبول",
+  "teamResults": "نتائج الفريق"
+}

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:team_generator/providers/roulette_provider.dart';
 import 'package:team_generator/screen/roulette_Screen/roulette_wheel_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RouletteInputScreen extends ConsumerStatefulWidget {
   const RouletteInputScreen({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class _RouletteInputScreenState extends ConsumerState<RouletteInputScreen> {
                     if (index == _controllers.length) {
                       return ListTile(
                         leading: const Icon(Icons.add),
-                        title: const Text('Add Name'),
+                        title: Text(AppLocalizations.of(context)!.addName),
                         onTap: () {
                           setState(() {
                             _controllers.add(TextEditingController());
@@ -54,8 +55,8 @@ class _RouletteInputScreenState extends ConsumerState<RouletteInputScreen> {
                       ),
                       title: TextField(
                         controller: _controllers[index],
-                        decoration: const InputDecoration(
-                          hintText: 'Enter name',
+                        decoration: InputDecoration(
+                          hintText: AppLocalizations.of(context)!.enterName,
                         ),
                       ),
                       trailing: IconButton(

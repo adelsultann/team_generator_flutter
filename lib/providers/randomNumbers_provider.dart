@@ -10,7 +10,7 @@ class RandomNumbers {
   final List<int> resultList; // Create an empty list of integers
   RandomNumbers({
     this.minimumNumber = 0,
-    this.maxmumNumber = 50,
+    this.maxmumNumber = 10,
     this.numberOfResult = 1,
     List<int>? resultList, // Nullable list parameter
   }) : resultList = resultList ?? []; // Initialize with an empty list if null

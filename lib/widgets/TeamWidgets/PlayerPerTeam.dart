@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:team_generator/providers/team_provider.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlayerPerTeam extends ConsumerWidget {
   const PlayerPerTeam({super.key});
@@ -18,7 +19,8 @@ class PlayerPerTeam extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Players per Team", style: TextStyle(fontSize: 16)),
+              Text(AppLocalizations.of(context)!.playerPerTeam,
+                  style: TextStyle(fontSize: 16)),
               Row(
                 children: [
                   IconButton(

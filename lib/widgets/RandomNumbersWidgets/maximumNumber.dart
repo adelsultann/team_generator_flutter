@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:team_generator/providers/randomNumbers_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MaxNumber extends ConsumerWidget {
   const MaxNumber({super.key});
@@ -13,8 +14,8 @@ class MaxNumber extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            "Maximum Number",
+          Text(
+            AppLocalizations.of(context)!.maxumiumNumbers,
             style: TextStyle(fontSize: 16),
           ),
           Row(
